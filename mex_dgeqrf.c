@@ -13,6 +13,7 @@
 #else
 #define DGEQRF dgeqrf
 #endif
+#include "lapack.h"
 
 
 double wtime()
@@ -36,9 +37,9 @@ double wtime()
 
 void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argin[])
 {
-  long m, n;
+  ptrdiff_t m, n;
   double *tau, *A;
-  long workspace_size, info;
+  ptrdiff_t workspace_size, info;
   double *workspace;
   double wsize_d;
 
@@ -59,7 +60,7 @@ void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argi
   DGEQRF(&m, &n, A, &m, tau, workspace, &workspace_size, &info);
 
   /* Compute */
-  workspace_size = (long)wsize_d;
+  workspace_size = (ptrdiff_t)wsize_d;
   workspace = (double *)mxMalloc(sizeof(double) * workspace_size);
   DGEQRF(&m, &n, A, &m, tau, workspace, &workspace_size, &info);
   mxFree(workspace);
