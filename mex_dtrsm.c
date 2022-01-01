@@ -13,7 +13,7 @@
 #else
 #define DTRSM dtrsm
 #endif
-
+#include "blas.h"
 
 double wtime()
 {
@@ -36,7 +36,7 @@ double wtime()
 
 void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argin[])
 {
-  long m, nrhs, lda;
+  ptrdiff_t m, nrhs, lda;
   double *A, *b, alpha;
   char side[2], uplo[2], trans[2], diag[2];
 
