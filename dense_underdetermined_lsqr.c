@@ -16,12 +16,13 @@
 #define DTRSV dtrsv
 #define DNRM2 dnrm2
 #endif
+#include "blas.h"
 
 
-double DNRM2(long *, double *, long *);
+//double DNRM2(long *, double *, long *);
 
 
-void scale(double *x, int n, double s)
+void scale(double *x, ptrdiff_t n, double s)
 {
   int i;
 
@@ -40,11 +41,11 @@ void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argi
 
   double *resvec, *xvec, *Atr, *r;
 
-  long m, n;
+  ptrdiff_t m, n;
   long maxit, it, i;
 
-  long int_zero = 0;
-  long int_one = 1;
+  ptrdiff_t int_zero = 0;
+  ptrdiff_t int_one = 1;
   double dbl_one = 1.0;
   double dbl_mone = -1.0;
   double dbl_zero = 0.0;
