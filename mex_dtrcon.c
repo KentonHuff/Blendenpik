@@ -13,6 +13,7 @@
 #else
 #define DTRCON dtrcon
 #endif
+#include "lapack.h"
 
 double wtime()
 {
@@ -35,11 +36,11 @@ double wtime()
 
 void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argin[])
 {
-  long n, ld;
+  ptrdiff_t n, ld;
   double rcond;
   double *A, *workspace1;
-  long *workspace2;
-  long info = 0;
+  ptrdiff_t *workspace2;
+  ptrdiff_t info = 0;
 
   ld = mxGetM(argin[0]);
   n = mxGetN(argin[0]);
@@ -47,7 +48,7 @@ void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argi
 
   /* Compute */
   workspace1 = (double *)mxMalloc(3 * n * sizeof(double));
-  workspace2 = (long *)mxMalloc(n * sizeof(long));
+  workspace2 = (ptrdiff_t *)mxMalloc(n * sizeof(long));
   DTRCON("1", "U", "N", &n, A, &ld, &rcond, workspace1, workspace2, &info);
   argout[0] = mxCreateDoubleScalar(rcond);
   mxFree(workspace1);
