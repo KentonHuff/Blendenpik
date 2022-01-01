@@ -99,11 +99,11 @@ if (matlab_blas)
     fprintf(fid, 'BLAS_UNDERSCORE = %s;\n', underscore);
     
     if (pc)
-        fprintf(fid, 'LAPACK_DIR = ''%s\\extern\\lib\\win32\\microsoft'';\n', matlabroot);
+        fprintf(fid, 'LAPACK_DIR = ''%s\\extern\\lib\\win64\\mingw64'';\n', matlabroot);
         fprintf(fid, 'LAPACK_NAME = ''mwlapack'';\n');
 
-        fprintf(fid, 'BLAS_DIR = ''%s\\extern\\lib\\win32\\microsoft'';\n', matlabroot);
-        fprintf(fid, 'BLAS_NAME = ''mwlapack'';\n');
+        fprintf(fid, 'BLAS_DIR = ''%s\\extern\\lib\\win64\\mingw64'';\n', matlabroot);
+        fprintf(fid, 'BLAS_NAME = ''mwblas'';\n');
     else
         fprintf(fid, 'LAPACK_DIR = ''%s'';\n', matlabroot);
         fprintf(fid, 'LAPACK_NAME = ''mwlapack'';\n');
