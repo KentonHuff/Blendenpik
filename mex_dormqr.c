@@ -13,6 +13,7 @@
 #else
 #define DORMQR dormqr
 #endif
+#include "lapack.h"
 
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 
@@ -37,9 +38,9 @@ double wtime()
 
 void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argin[])
 {
-  long m, n, k;
+  ptrdiff_t m, n, k;
   double *tau, *A, *C;
-  long workspace_size, info;
+  ptrdiff_t workspace_size, info;
   double *workspace;
   double wsize_d;
   char side[2], trans[2];
