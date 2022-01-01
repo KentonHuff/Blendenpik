@@ -13,6 +13,7 @@
 #else
 #define DGELS dgels
 #endif
+#include "lapack.h"
 
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 
@@ -37,13 +38,13 @@ double wtime()
 
 void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argin[])
 {
-  long m, n;
+  ptrdiff_t m, n;
   double *x, *b, *A;
-  long workspace_size, info;
+  ptrdiff_t workspace_size, info;
   double *workspace;
   double wsize_d;
-  long nrhs;
-  long ldb;
+  ptrdiff_t nrhs;
+  ptrdiff_t ldb;
   double dt;
 
   m = mxGetM(argin[0]);
@@ -67,7 +68,7 @@ void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argi
   DGELS("None", &m, &n, &nrhs, A, &m, b, &ldb, workspace, &workspace_size, &info);
 
   /* Compute */
-  workspace_size = (long)wsize_d;
+  workspace_size = (ptrdiff_t)wsize_d;
   workspace = (double *)mxMalloc(sizeof(double) * workspace_size);
   dt = -wtime();
   DGELS("None", &m, &n, &nrhs, A, &m, b, &ldb, workspace, &workspace_size, &info);
