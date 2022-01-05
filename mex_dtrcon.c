@@ -48,7 +48,7 @@ void mexFunction(int nargout, mxArray *argout[], int nargin, const mxArray *argi
 
   /* Compute */
   workspace1 = (double *)mxMalloc(3 * n * sizeof(double));
-  workspace2 = (ptrdiff_t *)mxMalloc(n * sizeof(long));
+  workspace2 = (ptrdiff_t *)mxMalloc(n * sizeof(ptrdiff_t));
   DTRCON("1", "U", "N", &n, A, &ld, &rcond, workspace1, workspace2, &info);
   argout[0] = mxCreateDoubleScalar(rcond);
   mxFree(workspace1);
